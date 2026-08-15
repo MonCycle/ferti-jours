@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Cycle — ServiVie</title>
+<meta name="google-site-verification" content="n-j36SogHjQAMnOLG45Z6C0YBKNcxxKc3YDd1Yyefh8" />
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Mon Cycle">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#7c2848">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --berry: #7c2848;
+    --berry-deep: #4a1130;
+    --berry-soft: #a8446b;
+    --rosegold: #e0977e;
+    --rosegold-soft: #f5c9b8;
+    --gold: #d4a24e;
+    --gold-soft: #f0d9a8;
+    --blush: #fdf2ec;
+    --blush-deep: #f8e3d8;
+    --sage: #7a9b7e;
+    --ink: #3a1526;
+    --white: #fffaf8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, var(--blush) 0%, #fbe9dd 100%);
+    color: var(--ink);
+    padding: 0 0 70px;
+  }
+  header{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.09) 0, transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(224,151,126,0.35) 0, transparent 40%),
+      linear-gradient(135deg, var(--berry) 0%, var(--berry-deep) 100%);
+    color: var(--white);
+    padding: 44px 20px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; top:-40px; right:-40px;
+    width:150px; height:150px; border-radius:50%;
+    background: radial-gradient(circle, rgba(212,162,78,0.25) 0%, transparent 70%);
+  }
+  header::after{
+    content:"";
+    position:absolute; bottom:-32px; left:50%; transform:translateX(-50%);
+    width:88px; height:88px; border-radius:50%;
+    background: linear-gradient(135deg, var(--rosegold) 0%, var(--gold) 100%);
+    box-shadow: 0 6px 20px rgba(74,17,48,0.35);
+  }
+  .logo{
+    width:60px; height:60px; border-radius:50%;
+    background: linear-gradient(135deg, var(--rosegold) 0%, var(--gold) 100%);
+    color:#fff; font-weight:700; font-family: 'Poppins', sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; margin: 0 auto 18px;
+    border: 3px solid rgba(255,255,255,0.85);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  header h1{
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 600; letter-spacing: 0.3px;
+  }
+  header p{
+    font-family: 'Poppins', sans-serif; font-weight:400;
+    font-size: 12.5px; opacity: 0.85; margin-top: 10px; letter-spacing: 1.8px; text-transform: uppercase;
+  }
+  main{
+    max-width: 620px; margin: 0 auto; padding: 0 20px;
+  }
+  .card{
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 26px;
+    margin-top: -30px;
+    box-shadow: 0 16px 40px rgba(74,17,48,0.16);
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(224,151,126,0.18);
+  }
+  label{
+    display:block; font-family: 'Poppins', sans-serif; font-weight:600; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--berry);
+    margin-bottom: 7px; margin-top: 20px;
+  }
+  label:first-child{margin-top:0;}
+  input{
+    width:100%; padding: 13px 16px; border: 1.5px solid var(--blush-deep);
+    border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus{outline: none; border-color: var(--rosegold); box-shadow: 0 0 0 4px rgba(224,151,126,0.18);}
+  .row{display:flex; gap:14px;}
+  .row > div{flex:1;}
+  button{
+    width:100%; margin-top: 26px; padding: 16px;
+    background: linear-gradient(135deg, var(--rosegold) 0%, var(--berry) 100%);
+    color: #fff; border:none; border-radius: 14px;
+    font-family: 'Poppins', sans-serif; font-weight:600; font-size: 15px; letter-spacing: 0.5px;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 8px 20px rgba(124,40,72,0.28);
+  }
+  button:hover{transform: translateY(-2px); box-shadow: 0 12px 26px rgba(124,40,72,0.35);}
+  button:active{transform: translateY(0);}
+  .disclaimer{
+    font-family: 'Poppins', sans-serif; font-size: 12.5px; line-height: 1.65;
+    background: linear-gradient(135deg, var(--gold-soft) 0%, #fbeccb 100%);
+    border-left: 4px solid var(--gold); padding: 16px 18px;
+    margin-top: 22px; color: #6b4d1e; border-radius: 10px;
+  }
+  #result{ margin-top: 30px; }
+  .legend{
+    display:flex; flex-wrap:wrap; gap: 16px; font-family: 'Poppins', sans-serif;
+    font-size: 12.5px; margin-bottom: 20px; justify-content:center;
+  }
+  .legend span{display:flex; align-items:center; gap:6px;}
+  .dot{width:12px; height:12px; border-radius:50%; display:inline-block;}
+  .cal-month{margin-bottom: 28px;}
+  .cal-month h3{
+    font-family: 'Playfair Display', serif; font-size: 16px; font-weight:600;
+    letter-spacing: 0.4px; color: var(--berry); margin-bottom: 12px; text-align:center;
+  }
+  .grid{
+    display:grid; grid-template-columns: repeat(7, 1fr); gap:5px;
+  }
+  .grid .wd{
+    font-family: 'Poppins', sans-serif; font-weight:600; font-size: 10px; text-align:center;
+    color: #c99; padding-bottom: 4px; text-transform:uppercase;
+  }
+  .day{
+    aspect-ratio: 1; display:flex; align-items:center; justify-content:center;
+    font-family: 'Poppins', sans-serif; font-size: 13px; border-radius: 10px;
+    background: var(--blush); color: #a05; font-weight:500;
+  }
+  .day.empty{background: transparent;}
+  .day.period{background: #1a1a1a; color:#fff;}
+  .day.fertile{background: #d32f2f; color:#fff; font-weight:bold;}
+  .day.ovulation{background: #2f6fa8; color:#fff; font-weight:bold; box-shadow: inset 0 0 0 2px #a9d0ec;}
+  .day.safe{background: var(--sage); color:#fff;}
+  .summary{
+    font-family: 'Poppins', sans-serif; font-size: 13.5px; line-height:1.8;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--blush-deep) 100%);
+    padding: 18px; border-radius: 14px; margin-bottom: 22px;
+    border: 1px solid rgba(224,151,126,0.25);
+  }
+  .summary b{color: var(--berry);}
+  footer{
+    text-align:center; font-family: 'Poppins', sans-serif; font-size: 11.5px;
+    color: #b98; margin-top: 34px; padding: 0 30px;
+  }
+  .contact-bar{
+    display:flex; justify-content:center; gap:12px; margin-top:18px; flex-wrap:wrap;
+  }
+  .contact-btn{
+    display:flex; align-items:center; gap:7px;
+    background:#fff; color: var(--berry); text-decoration:none;
+    font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:20px;
+    border:1.5px solid var(--blush-deep); box-shadow: 0 3px 10px rgba(124,40,72,0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .contact-btn:hover{transform: translateY(-1px); box-shadow: 0 6px 16px rgba(124,40,72,0.15);}
+  .contact-btn.whatsapp{color:#25D366;}
+  .contact-btn.mail{color: var(--berry);}
+  .admin-link{
+    display:inline-block; margin-top:16px; font-size:10.5px; color:#d8c4c9;
+    cursor:pointer; letter-spacing:1px; text-transform:uppercase;
+  }
+  .admin-link:hover{color: var(--berry);}
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(58,21,38,0.55);
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:#fff; border-radius:18px; padding:28px 26px; max-width:340px; width:100%;
+    position:relative; box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  }
+  .modal-box h3{font-family:'Playfair Display',serif; color:var(--berry); margin-bottom:16px; font-size:18px;}
+  .modal-box input{margin-bottom:12px;}
+  .modal-box button{margin-top:4px;}
+  .modal-close{
+    position:absolute; top:14px; right:16px; cursor:pointer; color:#aaa; font-size:16px;
+  }
+  .admin-error{color:#d32f2f; font-size:12px; margin-top:8px; min-height:14px;}
+  .pass-change-toggle{
+    text-align:center; font-size:11.5px; color:var(--rosegold); cursor:pointer;
+    margin-top:16px; text-decoration:underline;
+  }
+  #passForm{margin-top:14px;}
+  #passForm input{margin-bottom:10px;}
+  .stat-row{
+    display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--blush);
+    font-size:14px;
+  }
+  .stat-row b{color:var(--berry); font-size:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Ag+</div>
+  <h1>Calendrier du Cycle</h1>
+  <p>ServiVie — La conscience qui sert</p>
+</header>
+
+<main>
+  <div class="card">
+    <label for="startDate">1er jour des dernières règles</label>
+    <input type="date" id="startDate">
+
+    <div class="row">
+      <div>
+        <label for="cycleLength">Longueur du cycle (jours)</label>
+        <input type="number" id="cycleLength" value="28" min="20" max="45">
+      </div>
+      <div>
+        <label for="periodLength">Durée des règles (jours)</label>
+        <input type="number" id="periodLength" value="5" min="1" max="10">
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ <b>Important :</b> cette méthode (calendrier) estime une zone de fertilité, elle ne garantit pas l'absence de grossesse. Sa fiabilité dépend de la régularité du cycle — un cycle irrégulier rend le calcul peu fiable. En usage réel, le taux d'échec de cette méthode seule peut atteindre 12 à 24%, contre moins de 1% pour un stérilet. Pour une contraception fiable, consultez un professionnel de santé. Cet outil est informatif, pas un dispositif médical.
+    </div>
+
+    <button onclick="calculate()">Calculer mon calendrier</button>
+
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    ServiVie — outil informatif basé sur la méthode du calendrier (Ogino-Knaus) élargie. Ne remplace pas un avis médical.
+    <div class="contact-bar">
+      <a href="https://wa.me/22892004908" target="_blank" rel="noopener" class="contact-btn whatsapp">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4C7.4 4 3.6 7.8 3.6 12.45c0 1.5.4 2.96 1.14 4.24L3.5 21l4.4-1.16a8.9 8.9 0 0 0 4.15 1.06h.01c4.65 0 8.44-3.8 8.44-8.45a8.4 8.4 0 0 0-2.9-6.13zm-5.55 13c-1.3 0-2.57-.35-3.68-1.01l-.26-.16-2.74.72.73-2.67-.17-.27a7 7 0 0 1-1.08-3.73c0-3.87 3.15-7.02 7.03-7.02a7 7 0 0 1 4.97 2.06 6.97 6.97 0 0 1 2.06 4.96c0 3.87-3.16 7.02-7.03 7.02h-.01v.1z"/></svg>
+        +228 92 00 49 08
+      </a>
+      <a href="mailto:aagoudah@gmail.com" class="contact-btn mail">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13zm2.4.5 7.1 5.68a.75.75 0 0 0 .94 0L19.6 6H4.4zM20 7.85l-6.92 5.54a2.75 2.75 0 0 1-3.44 0L2.72 7.85V18.5A.5.5 0 0 0 3.22 19h17.06a.5.5 0 0 0 .5-.5V7.85z"/></svg>
+        aagoudah@gmail.com
+      </a>
+    </div>
+    <div class="admin-link" onclick="openAdmin()">Admin</div>
+  </footer>
+</main>
+
+<div id="adminModal" class="modal-overlay">
+  <div class="modal-box">
+    <div id="adminLogin">
+      <h3>Accès admin</h3>
+      <input type="password" id="adminPass" placeholder="Mot de passe">
+      <button onclick="checkAdminPass()">Entrer</button>
+      <p id="adminError" class="admin-error"></p>
+    </div>
+    <div id="adminStats" style="display:none;">
+      <h3>Statistiques de visites</h3>
+      <div id="statsContent">Chargement...</div>
+      <div class="pass-change-toggle" onclick="togglePassForm()">Changer le mot de passe</div>
+      <div id="passForm" style="display:none;">
+        <input type="password" id="newPass1" placeholder="Nouveau mot de passe">
+        <input type="password" id="newPass2" placeholder="Confirmer le mot de passe">
+        <button onclick="updatePassword()">Enregistrer</button>
+        <p id="passMsg" class="admin-error"></p>
+      </div>
+    </div>
+    <div class="modal-close" onclick="closeAdmin()">✕</div>
+  </div>
+</div>
+
+<script>
+// ==== CONFIGURATION SUPABASE ====
+// ⚠️ À remplacer par tes vraies valeurs (Settings → API dans Supabase)
+const SUPABASE_URL = 'https://kqvlazeogiglheanysrq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtxdmxhemVvZ2lnbGhlYW55c3JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3OTY1NDYsImV4cCI6MjEwMjM3MjU0Nn0.Wb7ylCuxn4-GCMIGcTunALLIBH3hIolNkBvsBXXGFLs';
+let ADMIN_PASSWORD = 'Servivie228'; // valeur de secours si Supabase indisponible
+
+// Récupère le mot de passe admin actuel depuis Supabase
+async function loadAdminPassword(){
+  if(SUPABASE_URL.includes('PASTE_')) return;
+  try{
+    const res = await fetch(SUPABASE_URL + '/rest/v1/app_settings?id=eq.1&select=admin_password', {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    });
+    const data = await res.json();
+    if(data && data[0] && data[0].admin_password){
+      ADMIN_PASSWORD = data[0].admin_password;
+    }
+  }catch(e){ /* garde la valeur de secours */ }
+}
+loadAdminPassword();
+
+// Enregistre une visite silencieusement à chaque ouverture de page
+async function trackVisit(){
+  if(SUPABASE_URL.includes('PASTE_')) return; // pas encore configuré
+  try{
+    await fetch(SUPABASE_URL + '/rest/v1/cycle_visits', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({})
+    });
+  }catch(e){ /* échec silencieux, ne bloque jamais l'utilisatrice */ }
+}
+trackVisit();
+
+// ==== PANNEAU ADMIN ====
+function openAdmin(){
+  document.getElementById('adminModal').classList.add('open');
+}
+function closeAdmin(){
+  document.getElementById('adminModal').classList.remove('open');
+  document.getElementById('adminLogin').style.display = 'block';
+  document.getElementById('adminStats').style.display = 'none';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('adminError').textContent = '';
+}
+async function checkAdminPass(){
+  await loadAdminPassword(); // s'assure d'avoir la dernière version avant de comparer
+  const val = document.getElementById('adminPass').value;
+  if(val !== ADMIN_PASSWORD){
+    document.getElementById('adminError').textContent = 'Mot de passe incorrect.';
+    return;
+  }
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminStats').style.display = 'block';
+  await loadStats();
+}
+async function loadStats(){
+  const statsDiv = document.getElementById('statsContent');
+  if(SUPABASE_URL.includes('PASTE_')){
+    statsDiv.innerHTML = '<p style="font-size:13px;color:#a66;">Supabase pas encore connecté. Ajoute ton URL et ta clé dans le code.</p>';
+    return;
+  }
+  try{
+    // Total des visites
+    const totalRes = await fetch(SUPABASE_URL + '/rest/v1/cycle_visits?select=id', {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'count=exact'
+      }
+    });
+    const contentRange = totalRes.headers.get('content-range'); // ex: "0-9/123"
+    const total = contentRange ? contentRange.split('/')[1] : '—';
+
+    // Visites des dernières 24h
+    const since = new Date(Date.now() - 24*60*60*1000).toISOString();
+    const todayRes = await fetch(SUPABASE_URL + '/rest/v1/cycle_visits?select=id&created_at=gte.' + since, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'count=exact'
+      }
+    });
+    const todayRange = todayRes.headers.get('content-range');
+    const today = todayRange ? todayRange.split('/')[1] : '—';
+
+    statsDiv.innerHTML =
+      '<div class="stat-row"><span>Total des visites</span><b>' + total + '</b></div>' +
+      '<div class="stat-row"><span>Dernières 24h</span><b>' + today + '</b></div>';
+  }catch(e){
+    statsDiv.innerHTML = '<p style="font-size:13px;color:#d32f2f;">Erreur de connexion à Supabase.</p>';
+  }
+}
+
+function togglePassForm(){
+  const form = document.getElementById('passForm');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('passMsg').textContent = '';
+}
+
+async function updatePassword(){
+  const p1 = document.getElementById('newPass1').value;
+  const p2 = document.getElementById('newPass2').value;
+  const msg = document.getElementById('passMsg');
+
+  if(p1.length < 4){
+    msg.textContent = 'Le mot de passe doit faire au moins 4 caractères.';
+    return;
+  }
+  if(p1 !== p2){
+    msg.textContent = 'Les deux mots de passe ne correspondent pas.';
+    return;
+  }
+  if(SUPABASE_URL.includes('PASTE_')){
+    msg.textContent = 'Supabase pas encore connecté.';
+    return;
+  }
+
+  try{
+    const res = await fetch(SUPABASE_URL + '/rest/v1/app_settings?id=eq.1', {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ admin_password: p1 })
+    });
+    if(res.ok){
+      ADMIN_PASSWORD = p1;
+      msg.style.color = '#2e7d32';
+      msg.textContent = 'Mot de passe mis à jour ✓';
+      document.getElementById('newPass1').value = '';
+      document.getElementById('newPass2').value = '';
+    }else{
+      msg.style.color = '#d32f2f';
+      msg.textContent = 'Erreur lors de la mise à jour.';
+    }
+  }catch(e){
+    msg.style.color = '#d32f2f';
+    msg.textContent = 'Erreur de connexion.';
+  }
+}
+
+function calculate(){
+  const startInput = document.getElementById('startDate').value;
+  const cycleLength = parseInt(document.getElementById('cycleLength').value) || 28;
+  const periodLength = parseInt(document.getElementById('periodLength').value) || 5;
+
+  if(!startInput){
+    alert("Merci d'indiquer la date du premier jour de tes dernières règles.");
+    return;
+  }
+
+  const start = new Date(startInput + 'T00:00:00');
+
+  // Ovulation estimée : cycleLength - 14 jours après le début des règles
+  const ovulationDayOffset = cycleLength - 14;
+  const ovulationDate = new Date(start);
+  ovulationDate.setDate(start.getDate() + ovulationDayOffset);
+
+  // Fenêtre fertile élargie : -5 jours avant ovulation (survie spermatozoïdes) à +1 jour après (survie ovule)
+  const fertileStart = new Date(ovulationDate);
+  fertileStart.setDate(ovulationDate.getDate() - 5);
+  const fertileEnd = new Date(ovulationDate);
+  fertileEnd.setDate(ovulationDate.getDate() + 1);
+
+  const periodEnd = new Date(start);
+  periodEnd.setDate(start.getDate() + periodLength - 1);
+
+  const cycleEnd = new Date(start);
+  cycleEnd.setDate(start.getDate() + cycleLength - 1);
+
+  renderResult(start, periodEnd, fertileStart, fertileEnd, ovulationDate, cycleEnd, cycleLength);
+}
+
+function fmt(d){
+  return d.toLocaleDateString('fr-FR', {day:'numeric', month:'long'});
+}
+
+function renderResult(periodStart, periodEnd, fertileStart, fertileEnd, ovulation, cycleEnd, cycleLength){
+  const resultDiv = document.getElementById('result');
+
+  let html = '';
+  html += '<div class="summary">';
+  html += '🩸 <b>Règles :</b> du ' + fmt(periodStart) + ' au ' + fmt(periodEnd) + '<br>';
+  html += '🌸 <b>Zone à risque élevé (éviter rapports non protégés) :</b> du ' + fmt(fertileStart) + ' au ' + fmt(fertileEnd) + '<br>';
+  html += '⭐ <b>Ovulation estimée :</b> ' + fmt(ovulation) + '<br>';
+  html += '✅ <b>Prochain cycle attendu vers le :</b> ' + fmt(new Date(cycleEnd.getTime() + 86400000));
+  html += '</div>';
+
+  html += '<div class="legend">';
+  html += '<span><i class="dot" style="background:#1a1a1a"></i> Règles</span>';
+  html += '<span><i class="dot" style="background:#d32f2f"></i> Risque élevé</span>';
+  html += '<span><i class="dot" style="background:#2f6fa8"></i> Ovulation</span>';
+  html += '<span><i class="dot" style="background:var(--sage)"></i> Zone plus sûre</span>';
+  html += '</div>';
+
+  // Build calendar covering the full cycle, grouped by month
+  const allDays = [];
+  let cursor = new Date(periodStart);
+  const totalDays = cycleLength;
+  for(let i=0; i<totalDays; i++){
+    const d = new Date(cursor);
+    let type = 'safe';
+    if(d >= periodStart && d <= periodEnd) type = 'period';
+    else if(d.toDateString() === ovulation.toDateString()) type = 'ovulation';
+    else if(d >= fertileStart && d <= fertileEnd) type = 'fertile';
+    allDays.push({date: new Date(d), type});
+    cursor.setDate(cursor.getDate()+1);
+  }
+
+  // group by month
+  const months = {};
+  allDays.forEach(day => {
+    const key = day.date.getFullYear() + '-' + day.date.getMonth();
+    if(!months[key]) months[key] = [];
+    months[key].push(day);
+  });
+
+  const weekdays = ['L','M','M','J','V','S','D'];
+
+  Object.keys(months).forEach(key => {
+    const daysInMonth = months[key];
+    const first = daysInMonth[0].date;
+    const monthName = first.toLocaleDateString('fr-FR', {month:'long', year:'numeric'});
+
+    html += '<div class="cal-month"><h3>' + monthName + '</h3><div class="grid">';
+    weekdays.forEach(wd => html += '<div class="wd">'+wd+'</div>');
+
+    // leading empty cells (Monday-start week)
+    let firstWeekday = (daysInMonth[0].date.getDay() + 6) % 7; // 0=Mon
+    for(let i=0;i<firstWeekday;i++) html += '<div class="day empty"></div>';
+
+    daysInMonth.forEach(day => {
+      html += '<div class="day ' + day.type + '">' + day.date.getDate() + '</div>';
+    });
+
+    html += '</div></div>';
+  });
+
+  resultDiv.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
